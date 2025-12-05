@@ -32,13 +32,16 @@ jobs:
           ls -la dist
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-pages-artifact@v4
         with:
           path: dist
+          name: 
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
