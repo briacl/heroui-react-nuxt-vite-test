@@ -23,13 +23,16 @@ jobs:
         run: npm ci
 
       - name: Build project
-        run: npm run build
+        run: |
+          npx vite build --base=${{ github.event.repository.name }}
       
       - name: Debug dist folder
         shell: bash
         run: |
           echo "Contents of dist folder:"
           ls -la dist
+          echo "Show ubuntu version"
+          lsb_release -a
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
